@@ -1,10 +1,6 @@
-/**
- * @(#) LicencePlongeur.java
- */
 package FFSSM;
 
 import java.time.LocalDate;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -30,12 +26,10 @@ public class Licence {
     /**
      * Est-ce que la licence est valide à la date indiquée ?
      * Une licence est valide pendant un an à compter de sa date de délivrance
-     * @param d la date à tester
-     * @return vrai si valide à la date d
-     **/
+     */
     public boolean estValide(LocalDate d) {
-         // TODO: Implémenter cette méthode
-        throw new UnsupportedOperationException("Pas encore implémenté");
+        // La licence est valide de dateDélivrance inclus à dateDélivrance + 1 an exclus
+        LocalDate finValidite = delivrance.plusYears(1);
+        return !d.isBefore(delivrance) && d.isBefore(finValidite);
     }
-
 }

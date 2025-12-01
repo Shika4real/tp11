@@ -1,8 +1,6 @@
-/**
- * @(#) Club.java
- */
 package FFSSM;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import lombok.Getter;
@@ -22,31 +20,28 @@ public class Club {
     @Getter @Setter
     public String telephone;
 
-    public Club(DiplomeDeMoniteur president, String nom) {
+    // Liste des plongées organisées par le club
+    private Set<Plongee> activites = new HashSet<>();
+
+    public Club(DiplomeDeMoniteur president, String nom, String telephone) {
         this.president = president;
         this.nom = nom;
+        this.telephone = telephone;
     }
 
-    /**
-     * Calcule l'ensemble des plongées non conformes organisées par ce club.
-     * Une plongée est conforme si tous les plongeurs de la palanquée ont une licence
-     * valide à la date de la plongée
-     * @return l'ensemble des plongées non conformes
-     */
     public Set<Plongee> plongeesNonConformes() {
-         // TODO: Implémenter cette méthode
-        throw new UnsupportedOperationException("Pas encore implémenté");
+        Set<Plongee> nonConformes = new HashSet<>();
+        for (Plongee p : activites) {
+            if (!p.estConforme()) {
+                nonConformes.add(p);
+            }
+        }
+        return nonConformes;
     }
 
-    /**
-     * Enregistre une nouvelle plongée organisée par ce club
-     * @param p la nouvelle plongée
-     */
     public void organisePlongee(Plongee p) {
-         // TODO: Implémenter cette méthode
-        throw new UnsupportedOperationException("Pas encore implémenté");
+        activites.add(p);
     }
-
 
     @Override
     public String toString() {
